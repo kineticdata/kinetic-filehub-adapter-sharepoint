@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kineticdata.filehub.adapters.sharepoint</groupId>
     <artifactId>kinetic-filehub-adapter-sharepoint</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
     <scm>
-        <connection>scm:git:https://github.com/KineticCommunity/kinetic-filehub-adapter-sharepoint.git</connection>
-        <developerConnection>scm:git:https://github.com/KineticCommunity/kinetic-filehub-adapter-sharepoint.git</developerConnection>
+        <connection>scm:git:https://github.com/kineticdata/kinetic-filehub-adapter-sharepoint.git</connection>
+        <developerConnection>scm:git:https://github.com/kineticdata/kinetic-filehub-adapter-sharepoint.git</developerConnection>
     </scm>
 
     <distributionManagement>

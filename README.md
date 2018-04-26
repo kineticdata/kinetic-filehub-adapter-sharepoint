@@ -1,3 +1,2 @@
-# kinetic-filehub-adapter-local
-Simple filestore implementation for interacting with the local filesystem (or network storage 
-mounted to the local filesystem).
+# kinetic-filehub-adapter-sharepoint
+The Microsoft SharePoint Adapter provides the functionality necessary for Kinetic Filehub to read and write files for a Microsoft SharePoint Document folder.
