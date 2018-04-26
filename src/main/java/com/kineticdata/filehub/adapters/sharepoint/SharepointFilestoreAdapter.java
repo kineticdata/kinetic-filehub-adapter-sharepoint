@@ -366,7 +366,8 @@ public class SharepointFilestoreAdapter implements FilestoreAdapter {
     private String retrieveFormDigestValue() {
         // Attempt to upload the file to the folder using the built URL
         HttpClient client = buildAuthenticatedHttpClient();
-        HttpPost post = new HttpPost("http://sharepoint/_api/contextinfo");
+        HttpPost post = new HttpPost(properties.getValue(Properties.SHAREPOINT_SITE.replaceAll("/\\z",""))
+            +"/_api/contextinfo");
         String formDigestValue = "";
         try {
             HttpResponse response = client.execute(post);
@@ -443,7 +444,8 @@ public class SharepointFilestoreAdapter implements FilestoreAdapter {
                     // Check to see if the previous folders exist as well
                     createFolderPath(folderLocation.substring(0, folderLocation.lastIndexOf(folders[i]) - 1), client);
                     // Create the new folder
-                    HttpPost digestPost = new HttpPost("http://sharepoint/_api/contextinfo");
+                    HttpPost digestPost = new HttpPost(properties.getValue(Properties.SHAREPOINT_SITE.replaceAll("/\\z",""))
+                        +"/_api/contextinfo");
                     response = client.execute(digestPost);
                     JSONObject json = (JSONObject)JSONValue.parse(EntityUtils.toString(response.getEntity()));
                     JSONObject result = (JSONObject)json.get("d");
@@ -452,7 +454,12 @@ public class SharepointFilestoreAdapter implements FilestoreAdapter {
 
                     // Attempt to upload the file to the folder using the built URL
                     LOGGER.debug("Creating the new folder at "+folderLocation);
-                    HttpPost post = new HttpPost("http://sharepoint/_api/web/folders/add('"+URLEncoder.encode(folderLocation,"UTF-8").replace("+","%20")+"')");
+                    StringBuilder url = new StringBuilder();
+                    url.append(properties.getValue(Properties.SHAREPOINT_SITE.replaceAll("/\\z","")));
+                    url.append("/_api/web/folders/add('");
+                    url.append(URLEncoder.encode(folderLocation,"UTF-8").replace("+","%20"));
+                    url.append("')");
+                    HttpPost post = new HttpPost(url.toString());
                     post.addHeader("X-RequestDigest",formDigestValue);
                     client.execute(post);
                 } else {
